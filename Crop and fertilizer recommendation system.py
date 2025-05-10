@@ -117,3 +117,57 @@ print(f"Shape of x_train: {x_train.shape}")
 print(f"Shape of y_train: {y_train.shape}")
 print(f"Shape of x_test: {x_test.shape}")
 print(f"Shape of y_test: {y_test.shape}")     
+
+#Scaling 
+from sklearn.preprocessing import StandardScaler
+sc = StandardScaler()
+
+x_train = sc.fit_transform(x_train)
+x_test = sc.transform(x_test)
+
+#Training Models
+
+# Let's Train a Decision Tree Classifier
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.metrics import accuracy_score
+
+# intialize the DecisionTree Classifier
+DT = DecisionTreeClassifier()
+# Train the model
+DT.fit(x_train,y_train)
+
+# evaluate the model on test dataset
+y_pred = DT.predict(x_test)
+print(f"Accuracy score of Decision Tree Classifier is: {accuracy_score(y_test,y_pred)}")
+
+# evaluate the model on train dataset
+y_pred_train = DT.predict(x_train)
+print(f"Accuracy score of Decision Tree Classifier is: {accuracy_score(y_train,y_pred_train)}")
+
+
+#Predictive System
+
+def crop_recommend(N,P,K,temperature,humidity,ph,rainfall):
+    features = np.array([[N,P,K,temperature,humidity,ph,rainfall]])
+    transformed_features = sc.transform(features)
+    prediction = DT.predict(transformed_features).reshape(1,-1)
+    crop_dict = {1: "Rice", 2: "Maize", 3: "Jute", 4: "Cotton", 5: "Coconut", 6: "Papaya", 7: "Orange",
+                8: "Apple", 9: "Muskmelon", 10: "Watermelon", 11: "Grapes", 12: "Mango", 13: "Banana",
+                14: "Pomegranate", 15: "Lentil", 16: "Blackgram", 17: "Mungbean", 18: "Mothbeans",
+                19: "Pigeonpeas", 20: "Kidneybeans", 21: "Chickpea", 22: "Coffee"}
+    crop = [crop_dict[i] for i in prediction[0]]
+
+    
+    return f"{crop} is a best crop to be cultivated " 
+
+
+# Predicting the crop for the given environment
+N = 90
+P = 42
+K = 43
+temperature = 20
+humidity = 82
+ph = 6.1
+rainfall = 202
+
+crop_recommend(N,P,K,temperature,humidity,ph,rainfall)
