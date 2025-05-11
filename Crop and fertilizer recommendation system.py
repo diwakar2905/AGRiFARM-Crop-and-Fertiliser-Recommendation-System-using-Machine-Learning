@@ -171,3 +171,30 @@ ph = 6.1
 rainfall = 202
 
 crop_recommend(N,P,K,temperature,humidity,ph,rainfall)
+
+# Save the model
+import pickle
+pickle.dump(DT, open('crop_model.sav', 'wb'))
+
+# Save the scaler
+pickle.dump(sc, open('crop_scaler.sav', 'wb'))
+
+
+#Use a Trained saved model for new predictions
+
+# load the saved model and predict the crop
+DT = pickle.load(open('crop_model.sav', 'rb'))
+
+# load the saved scaler
+sc = pickle.load(open('crop_scaler.sav', 'rb'))
+
+# Predicting the crop for the given environment
+N = 90
+P = 42
+K = 43
+temperature = 20
+humidity = 82
+ph = 6.1
+rainfall = 202
+
+crop_recommend(N,P,K,temperature,humidity,ph,rainfall)
