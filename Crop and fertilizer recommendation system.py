@@ -3,6 +3,8 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
+import warnings
+warnings.filterwarnings('ignore')
 
 #loading all the data required for crop and read the data
 crop=pd.read_csv("D:/Crop and Fertilizer recommendation system/24f8996b599028111827.csv")
