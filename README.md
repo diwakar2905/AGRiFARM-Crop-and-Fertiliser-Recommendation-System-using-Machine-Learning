@@ -58,10 +58,6 @@ Features: Soil Type, Crop Type, Nutrient Levels
 
 Target: Fertilizer Name
 
-Size: [Specify if known]
-
-Source: [Specify if known]
-
 🧠 Model Architectures
 Crop Recommendation
 Algorithms Used:
