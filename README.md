@@ -1,6 +1,12 @@
 # Crop-and-Fertiliser-Recommendation-System-using-Machine-Learning
 🌾 Crop & Fertilizer Recommendation System using Machine Learning
 An intelligent system that leverages machine learning to guide farmers and agricultural professionals in selecting the most suitable crops and fertilizers, based on real-time soil and environmental data.
+![Screenshot 2025-05-17 011408](https://github.com/user-attachments/assets/9ebd29c5-f813-4727-9c24-660fed9717b1)
+![Screenshot 2025-05-17 011445](https://github.com/user-attachments/assets/fdf1ea43-3ed0-4fac-88db-e7ae3ab28b4f)
+![Screenshot 2025-05-17 011431](https://github.com/user-attachments/assets/3009f50d-59f1-435f-9ec1-1f746401ed90)
+
+
+
 
 📑 Table of Contents
 Overview
