@@ -1,68 +1,81 @@
-# AGRiFARM-Crop-and-Fertiliser-Recommendation-System-using-Machine-Learning
-🌾 Crop & Fertilizer Recommendation System using Machine Learning
-An intelligent system that leverages machine learning to guide farmers and agricultural professionals in selecting the most suitable crops and fertilizers, based on real-time soil and environmental data.
+🌾 AGRiFARM - Crop & Fertilizer Recommendation System using Machine Learning
 
-![Screenshot 2025-05-17 011408](https://github.com/user-attachments/assets/9ebd29c5-f813-4727-9c24-660fed9717b1)
-![Screenshot 2025-05-17 011445](https://github.com/user-attachments/assets/fdf1ea43-3ed0-4fac-88db-e7ae3ab28b4f)
-![Screenshot 2025-05-17 011431](https://github.com/user-attachments/assets/3009f50d-59f1-435f-9ec1-1f746401ed90)
+An intelligent, data-driven system built with machine learning that empowers farmers and agricultural professionals to make smarter decisions about crop selection and fertilizer application based on real-time soil and environmental parameters.
 
+![Screenshot 2025-05-17 011408](https://github.com/user-attachments/assets/4200ee9f-e8d7-488f-8292-6d2854c6cf90)
 
+![Screenshot 2025-05-17 011431](https://github.com/user-attachments/assets/24c57e47-03b6-4b60-8f58-85382ca6fc03)
 
+![Screenshot 2025-05-17 011445](https://github.com/user-attachments/assets/f57073a5-edcb-4452-b7c9-fd3059900050)
 
 📑 Table of Contents
-Overview
-
-Features
-
-Datasets
-
-Model Architectures
-
-System Architecture
-
-Results
-
-Installation
-
-Usage
-
-Contributing
-
-License
-
 🌟 Overview
-Modern agriculture requires data-driven decisions for optimal yield and sustainability. This project utilizes advanced machine learning algorithms to provide actionable recommendations for both crop selection and fertilizer application, tailored to specific soil nutrients and environmental conditions. By analyzing parameters like nitrogen, phosphorus, potassium, temperature, humidity, pH, and rainfall, the system empowers users to make informed choices that boost productivity and soil health.
 
 🚀 Features
-Crop Recommendation: Suggests the best crops for given soil and environmental parameters.
-
-Fertilizer Recommendation: Recommends optimal fertilizers to maximize crop yield and maintain soil health.
-
-User-Friendly Web App: Interactive and intuitive interface for seamless user experience.
-
-Data Visualization: Graphical representation of predictions and input data.
-
-High Accuracy: Employs multiple machine learning models for reliable results.
 
 📊 Datasets
-Crop Recommendation Dataset
-Features: Nitrogen, Phosphorus, Potassium, Temperature, Humidity, pH, Rainfall
 
-Target: Crop label
+🧠 Model Architectures
 
-Size: 2,200 records
+🏗️ System Architecture
 
-Source: Kaggle - Crop Recommendation Dataset
+📈 Results
 
-Fertilizer Recommendation Dataset
+💻 Installation
+
+🛠️ Usage
+
+🤝 Contributing
+
+📝 License
+
+🌟 Overview
+Modern agriculture demands data-driven insights for improving yield, profitability, and sustainability. This project uses advanced machine learning models to analyze parameters like:
+
+🌱 Nitrogen (N)
+
+🌱 Phosphorus (P)
+
+🌱 Potassium (K)
+
+🌡️ Temperature
+
+💧 Humidity
+
+⚗️ pH Level
+
+🌧️ Rainfall
+
+…and recommends the best-suited crop and fertilizer tailored to those conditions.
+
+🚀 Features
+🌿 Crop Recommendation — Suggests the most suitable crops based on soil and climate parameters.
+
+🧪 Fertilizer Recommendation — Recommends optimal fertilizers to enhance productivity and soil health.
+
+🌐 Interactive Web Application — Clean, intuitive Flask-based interface.
+
+📊 Data Visualization — Graphs and charts for clearer insights.
+
+📈 High Accuracy — Utilizes multiple ML models with excellent performance.
+
+📊 Datasets
+📌 Crop Recommendation Dataset
+Features: N, P, K, Temperature, Humidity, pH, Rainfall
+
+Target: Crop Name
+
+Records: 2,200
+
+Source: Kaggle
+
+📌 Fertilizer Recommendation Dataset
 Features: Soil Type, Crop Type, Nutrient Levels
 
 Target: Fertilizer Name
 
 🧠 Model Architectures
-Crop Recommendation
-Algorithms Used:
-
+📈 Crop Recommendation Models
 Decision Tree
 
 Gaussian Naive Bayes
@@ -71,93 +84,108 @@ Support Vector Machine (SVM)
 
 Logistic Regression
 
-Random Forest
+Random Forest ✅ (Best: 99.55% accuracy)
 
 XGBoost
 
 K-Nearest Neighbors (KNN)
 
-Best Model: Random Forest (Accuracy: 99.55%)
+📈 Fertilizer Recommendation Model
+Algorithm: [Specify Model, e.g., Decision Tree]
 
-Fertilizer Recommendation
-Algorithm Used: [Specify, e.g., Decision Tree]
-
-Accuracy: [Specify if available]
+Accuracy: [Add here if available]
 
 🏗️ System Architecture
-The system is structured into two main modules:
+Two primary modules integrated into a single web app:
 
-Crop Recommendation Module: Processes soil and environmental parameters to predict the most suitable crop.
+🌿 Crop Recommendation Module — Predicts suitable crops based on soil and environment.
 
-Fertilizer Recommendation Module: Suggests the optimal fertilizer based on selected crop and soil nutrients.
+🧪 Fertilizer Recommendation Module — Suggests appropriate fertilizers for the selected crop.
 
-Both modules are integrated into a web application for a smooth user workflow.
-
+<p align="center"> <img src="https://github.com/user-attachments/assets/3009f50d-59f1-435f-9ec1-1f746401ed90" width="600"> </p>
 📈 Results
-Crop Recommendation:
+📌 Crop Recommendation
+✅ Random Forest: 99.55% accuracy
 
-Random Forest achieved the highest accuracy (99.55%).
+XGBoost, GaussianNB, and others also performed well.
 
-Other models like XGBoost and Gaussian Naive Bayes also performed well.
+📌 Fertilizer Recommendation
+[Add performance metrics when available]
 
-Fertilizer Recommendation:
-
-[Add specific results if available.]
-
-For detailed metrics and confusion matrices, refer to the Jupyter notebooks in this repository.
+For detailed confusion matrices and evaluation metrics, refer to the Jupyter Notebooks in this repository.
 
 💻 Installation
-Clone the Repository
-
+1️⃣ Clone the Repository
 bash
+Copy
+Edit
 git clone https://github.com/diwakar2905/Crop-and-Fertiliser-Recommendation-System-using-Machine-Learning.git
 cd Crop-and-Fertiliser-Recommendation-System-using-Machine-Learning
-Create a Virtual Environment
-
+2️⃣ Create a Virtual Environment
 bash
+Copy
+Edit
 python -m venv env
-source env/bin/activate  # On Windows: env\Scripts\activate
-Install Dependencies
-
+source env/bin/activate   # On Windows: env\Scripts\activate
+3️⃣ Install Dependencies
 bash
+Copy
+Edit
 pip install -r requirements.txt
-Run the Application
-
+4️⃣ Run the Application
 bash
+Copy
+Edit
 python app.py
-Access the Web Application
-Open your browser and navigate to http://localhost:5000
+5️⃣ Access the Web Application
+Open your browser and visit: http://localhost:5000
 
 🛠️ Usage
-Crop Recommendation
-Go to the Crop Recommendation section in the web app.
+🌱 Crop Recommendation
+Enter soil parameters: N, P, K, Temperature, Humidity, pH, Rainfall.
 
-Enter soil parameters: Nitrogen, Phosphorus, Potassium, Temperature, Humidity, pH, and Rainfall.
+Click Predict to get the recommended crop.
 
-Click Predict to receive the recommended crop.
+🧪 Fertilizer Recommendation
+Enter selected crop name and current soil nutrient levels.
 
-Fertilizer Recommendation
-Go to the Fertilizer Recommendation section.
-
-Enter the crop name and current soil nutrient levels.
-
-Click Recommend to get the suggested fertilizer.
+Click Recommend to receive fertilizer suggestions.
 
 🤝 Contributing
-Contributions are welcome! To contribute:
+Love this project? Help improve it!
 
-Fork this repository.
+To Contribute:
+Fork this repo.
 
-Create a new branch for your feature or bugfix:
+Create a new branch:
 
 bash
+Copy
+Edit
 git checkout -b feature/YourFeatureName
 Commit your changes:
 
 bash
+Copy
+Edit
 git commit -m "Add Your Feature"
-Push to your branch:
+Push your branch:
 
 bash
+Copy
+Edit
 git push origin feature/YourFeatureName
-Open a Pull Request and describe your changes.
+Open a Pull Request describing your changes.
+
+
+🌟 Acknowledgements
+Kaggle Datasets
+
+Flask Documentation
+
+Scikit-learn
+
+Community contributors ❤️
+
+📌 Connect & Feedback
+Have ideas or suggestions? Feel free to open an issue or reach out via LinkedIn or email.
