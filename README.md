@@ -1,4 +1,4 @@
-# Crop-and-Fertiliser-Recommendation-System-using-Machine-Learning
+# AGRiFARM-Crop-and-Fertiliser-Recommendation-System-using-Machine-Learning
 🌾 Crop & Fertilizer Recommendation System using Machine Learning
 An intelligent system that leverages machine learning to guide farmers and agricultural professionals in selecting the most suitable crops and fertilizers, based on real-time soil and environmental data.
 ![Screenshot 2025-05-17 011408](https://github.com/user-attachments/assets/9ebd29c5-f813-4727-9c24-660fed9717b1)
