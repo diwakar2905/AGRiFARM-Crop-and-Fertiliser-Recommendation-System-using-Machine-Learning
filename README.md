@@ -84,16 +84,16 @@ Support Vector Machine (SVM)
 
 Logistic Regression
 
-Random Forest ✅ (Best: 99.55% accuracy)
+Random Forest ✅ (Best: 98.55% accuracy)
 
 XGBoost
 
 K-Nearest Neighbors (KNN)
 
 📈 Fertilizer Recommendation Model
-Algorithm: [Specify Model, e.g., Decision Tree]
+Algorithm: Decision Tree
 
-Accuracy: [Add here if available]
+Accuracy: [100%]
 
 🏗️ System Architecture
 Two primary modules integrated into a single web app:
@@ -102,81 +102,16 @@ Two primary modules integrated into a single web app:
 
 🧪 Fertilizer Recommendation Module — Suggests appropriate fertilizers for the selected crop.
 
-<p align="center"> <img src="https://github.com/user-attachments/assets/3009f50d-59f1-435f-9ec1-1f746401ed90" width="600"> </p>
 📈 Results
 📌 Crop Recommendation
-✅ Random Forest: 99.55% accuracy
+✅ Random Forest: 98.55% accuracy
 
 XGBoost, GaussianNB, and others also performed well.
 
 📌 Fertilizer Recommendation
-[Add performance metrics when available]
+✅ Descision Tree: 99.55% accuracy
 
 For detailed confusion matrices and evaluation metrics, refer to the Jupyter Notebooks in this repository.
-
-💻 Installation
-1️⃣ Clone the Repository
-bash
-Copy
-Edit
-git clone https://github.com/diwakar2905/Crop-and-Fertiliser-Recommendation-System-using-Machine-Learning.git
-cd Crop-and-Fertiliser-Recommendation-System-using-Machine-Learning
-2️⃣ Create a Virtual Environment
-bash
-Copy
-Edit
-python -m venv env
-source env/bin/activate   # On Windows: env\Scripts\activate
-3️⃣ Install Dependencies
-bash
-Copy
-Edit
-pip install -r requirements.txt
-4️⃣ Run the Application
-bash
-Copy
-Edit
-python app.py
-5️⃣ Access the Web Application
-Open your browser and visit: http://localhost:5000
-
-🛠️ Usage
-🌱 Crop Recommendation
-Enter soil parameters: N, P, K, Temperature, Humidity, pH, Rainfall.
-
-Click Predict to get the recommended crop.
-
-🧪 Fertilizer Recommendation
-Enter selected crop name and current soil nutrient levels.
-
-Click Recommend to receive fertilizer suggestions.
-
-🤝 Contributing
-Love this project? Help improve it!
-
-To Contribute:
-Fork this repo.
-
-Create a new branch:
-
-bash
-Copy
-Edit
-git checkout -b feature/YourFeatureName
-Commit your changes:
-
-bash
-Copy
-Edit
-git commit -m "Add Your Feature"
-Push your branch:
-
-bash
-Copy
-Edit
-git push origin feature/YourFeatureName
-Open a Pull Request describing your changes.
-
 
 🌟 Acknowledgements
 Kaggle Datasets
