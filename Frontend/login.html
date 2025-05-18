@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Login - Crop Recommendation System</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      background: url('Green Yellow Modern Farming Presentation.png') center center/cover no-repeat;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Segoe UI', Arial, sans-serif;
+      flex-direction: column;
+    }
+    .navbar {
+      width: 100%;
+      background: rgba(192, 217, 63, 0.13); /* subtle accent yellow glass effect */
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      box-shadow: 0 2px 12px rgba(42,77,35,0.08);
+      border-bottom: 1.5px solid #e0e6ea;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0 32px;
+      position: sticky;
+      top: 0;
+      left: 0;
+      z-index: 10;
+      height: 64px;
+      box-sizing: border-box;
+      transition: background 0.3s;
+    }
+    .navbar .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .navbar .nav-logo img {
+      height: 38px;
+      width: 38px;
+      border-radius: 50%;
+      background: #fff;
+      object-fit: cover;
+    }
+    .navbar .nav-logo span {
+      color: #fff;
+      font-size: 1.3rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+    }
+    .navbar .nav-links {
+      display: flex;
+      gap: 28px;
+      justify-content: center;
+      align-items: center;
+    }
+    .navbar .nav-links a {
+      color: var(--deep-green);
+      text-decoration: none;
+      font-size: 1.15rem;
+      font-weight: 600;
+      transition: color 0.2s;
+      padding: 8px 0;
+      border-bottom: 2px solid transparent;
+      text-shadow: 0 2px 8px rgba(192,217,63,0.10);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .navbar .nav-links a.active,
+    .navbar .nav-links a:hover {
+      color: var(--accent-yellow);
+      border-bottom: 2px solid var(--accent-yellow);
+      background: none;
+      border-radius: 0;
+    }
+    .login-glass {
+      background: rgba(255,255,255,0.18);
+      box-shadow: 0 8px 32px 0 rgba(31,38,135,0.18);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border-radius: 18px;
+      border: 1px solid rgba(255,255,255,0.28);
+      max-width: 400px;
+      width: 90%;
+      padding: 40px 32px 32px 32px;
+      text-align: center;
+      color: #fff;
+      position: relative;
+      margin-top: 100px;
+    }
+    .login-glass .logo {
+      width: 64px;
+      height: 64px;
+      margin-bottom: 18px;
+      background: #fff;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .login-glass .logo img {
+      width: 40px;
+      height: 40px;
+      display: block;
+    }
+    .login-glass h1 {
+      font-size: 2.2rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      margin: 0 0 8px 0;
+      color: #fff;
+      text-shadow: 0 2px 8px rgba(0,0,0,0.18);
+    }
+    .login-glass p {
+      font-size: 1.1rem;
+      margin-bottom: 24px;
+      color: #f3f3f3;
+      letter-spacing: 0.04em;
+    }
+    .login-glass input {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      border: none;
+      border-radius: 7px;
+      font-size: 1rem;
+      background: rgba(255,255,255,0.85);
+      color: #222;
+      outline: none;
+      box-sizing: border-box;
+    }
+    .login-glass button {
+      width: 100%;
+      padding: 12px;
+      background: #2a4d69;
+      color: #fff;
+      border: none;
+      border-radius: 7px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-top: 10px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .login-glass button:hover {
+      background: #1e3552;
+    }
+    #error-message {
+      color: #ffb3b3;
+      margin-top: 12px;
+      min-height: 24px;
+    }
+    .login-glass .signup-link {
+      display: block;
+      margin-top: 18px;
+      color: #fff;
+      text-decoration: underline;
+      font-size: 1rem;
+      transition: color 0.2s;
+    }
+    .login-glass .signup-link:hover {
+      color: #ffeb3b;
+    }
+    @media (max-width: 600px) {
+      .navbar {
+        flex-direction: column;
+        height: auto;
+        padding: 8px 8px;
+      }
+      .navbar .nav-links {
+        gap: 14px;
+      }
+      .login-glass {
+        padding: 24px 8px 18px 8px;
+        margin-top: 80px;
+      }
+      .login-glass h1 {
+        font-size: 1.4rem;
+      }
+    }
+    .navbar .logo {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: #1a73e8;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .navbar .logo img {
+      height: 40px;
+      width: auto;
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <div class="logo">
+      <img src="Yellow Black Bold Honey Farm Logo (1).png" alt="Logo" style="height: 230px; width: auto;">
+    </div>
+    <div class="nav-links">
+      <a href="index.html" class="active"><i class="fas fa-home"></i> Home</a>
+      <a href="about.html"><i class="fas fa-leaf"></i> About Us</a>
+      <a href="contact.html"><i class="fas fa-envelope"></i> Contact Us</a>
+      <a href="login.html"><i class="fas fa-sign-in-alt"></i> Login</a>
+    </div>
+  </nav>
+  <div class="login-glass">
+    <div class="logo">
+      <img src="https://img.icons8.com/ios-filled/50/228B22/wheat.png" alt="Logo" />
+    </div>
+    <h1>BORCELLE</h1>
+    <p>Farming Presentation</p>
+    <input type="text" id="username" placeholder="Username" required>
+    <input type="password" id="password" placeholder="Password" required>
+    <button onclick="login()">Login</button>
+    <div id="error-message"></div>
+    <a href="signup.html" class="signup-link">Don't have an account? Sign Up</a>
+  </div>
+  <script src="login.js"></script>
+</body>
+</html>
