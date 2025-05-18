@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Crop & Fertilizer Recommendation</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css?family=Poppins:700,500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <style>
+    :root {
+      --primary-green: #2a4d23;
+      --accent-yellow: #c0d93f;
+      --white: #fff;
+      --deep-green: #335c67;
+      --input-bg: #f8fafc;
+      --input-shadow: 0px 8px 24px rgba(0, 0, 0, 0.13);
+      --input-border: #e0e6ea;
+      --input-placeholder: #335c67;
+      --button-bg: #c0d93f;
+      --button-hover: #b6d43a;
+      --button-text: #222;
+      --soft-shadow: 0px 8px 24px rgba(0, 0, 0, 0.13);
+    }
+
+    body {
+      font-family: 'Poppins', 'Segoe UI', Arial, sans-serif;
+      background: #f4f8fb;
+      color: var(--deep-green);
+      font-size: 16px;
+    }
+    @media (min-width: 768px) {
+      body { font-size: 18px; }
+    }
+    @media (min-width: 992px) {
+      body { font-size: 20px; }
+    }
+
+    /* Navbar with scroll effect */
+    .navbar {
+      width: 100%;
+      background: rgba(192, 217, 63, 0.13); /* subtle accent yellow glass effect */
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      box-shadow: 0 2px 12px rgba(42,77,35,0.08);
+      border-bottom: 1.5px solid #e0e6ea;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0 32px;
+      position: sticky;
+      top: 0;
+      left: 0;
+      z-index: 10;
+      height: 64px;
+      box-sizing: border-box;
+      transition: background 0.3s;
+    }
+    .navbar.scrolled {
+      background: rgba(42,77,35,0.92);
+      box-shadow: 0 2px 12px rgba(42,77,35,0.10);
+    }
+    .navbar .nav-links {
+      display: flex;
+      gap: 28px;
+      justify-content: center;
+      align-items: center;
+    }
+    .navbar .nav-links a {
+      color: var(--deep-green);
+      text-decoration: none;
+      font-size: 1.15rem;
+      font-weight: 600;
+      transition: color 0.2s;
+      padding: 8px 0;
+      border-bottom: 2px solid transparent;
+      text-shadow: 0 2px 8px rgba(192,217,63,0.10);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .navbar .nav-links a.active,
+    .navbar .nav-links a:hover {
+      color: var(--accent-yellow);
+      border-bottom: 2px solid var(--accent-yellow);
+      background: none;         /* Remove highlight background */
+      border-radius: 0;         /* Remove rounded highlight */
+    }
+
+    /* Hero Banner */
+    .hero-banner {
+      width: 100%;
+      max-width: 1200px;
+      margin: 32px auto 24px auto;
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: var(--soft-shadow);
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .hero-banner video,
+    .hero-banner img {
+      width: 100%;
+      height: 480px;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+      border-radius: 24px; /* Rectangle with rounded corners */
+      box-shadow: var(--soft-shadow);
+      /* Remove any styles that make it circular or fully rounded */
+    }
+    .hero-banner .hero-overlay {
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      text-align: center;
+      background: rgba(0,0,0,0.18);
+      border-radius: 24px;
+      z-index: 2;
+    }
+    .hero-banner .hero-overlay h1 {
+      font-size: 4rem;
+      font-weight: 800;
+      letter-spacing: 0.05em;
+      margin: 0;
+      text-shadow: 0 4px 24px rgba(0,0,0,0.25);
+      font-family: 'Poppins', 'Segoe UI', Arial, sans-serif;
+      animation: fadeInDown 1.2s;
+    }
+    .hero-banner .hero-overlay .subtitle {
+      font-size: 1.5rem;
+      letter-spacing: 0.3em;
+      margin-top: 12px;
+      font-weight: 500;
+      text-shadow: 0 2px 8px rgba(0,0,0,0.18);
+      animation: fadeInUp 1.5s;
+      font-family: 'Poppins', 'Segoe UI', Arial, sans-serif;
+    }
+
+    /* Input Section */
+    .input-section {
+      background: #f4f8fb;
+      padding: 48px 0 32px 0;
+      display: flex;
+      justify-content: center;
+    }
+    .input-container {
+      background: #fff;
+      border-radius: 18px;
+      box-shadow: var(--soft-shadow);
+      padding: 4vw 3vw 3vw 3vw;
+      max-width: 700px;
+      width: 95%;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .input-container h2 {
+      color: var(--deep-green);
+      margin-bottom: 18px;
+      font-size: 2rem;
+      font-weight: 700;
+    }
+    .input-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4vw;
+      margin-bottom: 4vw;
+    }
+    .input-row input {
+      padding: 18px 24px;
+      border: none;
+      border-radius: 20px;
+      font-size: 1.15rem;
+      background: var(--input-bg);
+      color: var(--deep-green);
+      outline: none;
+      box-sizing: border-box;
+      box-shadow: var(--input-shadow);
+      font-weight: 500;
+      transition: box-shadow 0.2s;
+    }
+    .input-row input:focus {
+      box-shadow: 0px 8px 32px rgba(192,217,63,0.18);
+    }
+    .input-row input::placeholder {
+      color: var(--input-placeholder);
+      opacity: 0.8;
+      font-size: 1.1rem;
+      font-weight: 500;
+    }
+    .input-group {
+      width: 100%;
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+    .input-icon {
+      position: absolute;
+      left: 20px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--accent-yellow);
+      font-size: 1.3rem;
+      pointer-events: none;
+      z-index: 2;
+    }
+    .input-group input {
+      padding-left: 48px; /* enough space for icon */
+      flex: 1;
+    }
+    .input-unit {
+      margin-left: 8px;
+      color: #888;
+      font-size: 1rem;
+      min-width: 40px;
+      font-weight: 500;
+    }
+    .predict-btn {
+      width: 100%;
+      padding: 18px 0;
+      background: var(--button-bg);
+      color: var(--button-text);
+      border: none;
+      border-radius: 16px;
+      font-size: 1.35rem;
+      font-weight: 700;
+      margin-top: 10px;
+      cursor: pointer;
+      transition: all 0.2s ease-in-out;
+      box-shadow: var(--soft-shadow);
+      letter-spacing: 0.02em;
+    }
+    .predict-btn:hover {
+      background-color: #28a745;
+      transform: scale(1.03);
+    }
+    #resultSection {
+      margin-top: 24px;
+    }
+    #result {
+      color: #689f38;
+      font-size: 1.3rem;
+      font-weight: 600;
+    }
+    #fertilizer {
+      color: #335c67;
+      font-size: 1.1rem;
+      margin-top: 8px;
+    }
+    @media (max-width: 900px) {
+      .input-container { padding: 5vw 2vw 3vw 2vw; }
+      .input-row { grid-template-columns: 1fr; gap: 3vw; }
+      .hero-banner video, .hero-banner img { height: 220px; }
+      .hero-banner .hero-overlay h1 { font-size: 2rem; }
+      .hero-banner .hero-overlay .subtitle { font-size: 1rem; }
+    }
+    @keyframes fadeInDown {
+      from { opacity: 0; transform: translateY(-40px);}
+      to { opacity: 1; transform: translateY(0);}
+    }
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(40px);}
+      to { opacity: 1; transform: translateY(0);}
+    }
+
+    /* Add this CSS for spinner */
+    .loader {
+  display: inline-block;
+  width: 28px;
+  height: 28px;
+  border: 3px solid #c0d93f;
+  border-radius: 50%;
+  border-top: 3px solid #335c67;
+  animation: spin 1s linear infinite;
+  vertical-align: middle;
+  margin-right: 8px;
+}
+@keyframes spin {
+  0% { transform: rotate(0deg);}
+  100% { transform: rotate(360deg);}
+}
+
+img, video {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <div class="nav-links">
+      <a href="index.html" class="active"><i class="fas fa-home"></i> Home</a>
+      <a href="about.html"><i class="fas fa-leaf"></i> About Us</a>
+      <a href="login.html"><i class="fas fa-sign-in-alt"></i> Login</a>
+    </div>
+  </nav>
+  
+<section class="hero-banner" style="position:relative; width:100%; height:480px; display:flex; align-items:center; justify-content:center; overflow:hidden; margin-bottom:24px;">
+  <video autoplay muted loop playsinline style="width:100%; height:100%; object-fit:cover; border-radius:24px; box-shadow:0px 8px 24px rgba(0,0,0,0.15);">
+    <source src="Brown Modern Agriculture Video (1).mp4" type="video/mp4">
+    <!-- Fallback image if video not supported -->
+    <img src="your-fallback-image.jpg" alt="Agriculture Banner" style="width:100%; height:100%; object-fit:cover; border-radius:24px;">
+  </video>
+  
+</section>
+
+<section class="input-section" id="input-section">
+  <div class="input-container">
+    <div class="switch-tabs" style="display:flex; justify-content:center; gap:12px; margin-bottom:24px;">
+      <button id="cropTab" class="tab-btn active" onclick="showTab('crop')">Crop Recommendation</button>
+      <button id="fertilizerTab" class="tab-btn" onclick="showTab('fertilizer')">Fertilizer Recommendation</button>
+    </div>
+    <!-- Crop Recommendation Form -->
+    <form id="cropForm" autocomplete="off" onsubmit="event.preventDefault(); predictCrop();">
+      <h2>AI Crop Recommender</h2>
+      <div class="input-row">
+        <div class="input-group">
+          <span class="input-icon">🌱</span>
+          <input type="number" id="N" name="N in mg/kg" placeholder="Nitrogen (N in mg/kg)" min="0" max="1000" required>
+          
+        </div>
+        <div class="input-group">
+          <span class="input-icon">🌾</span>
+          <input type="number" id="P" name="P" placeholder="Phosphorous (P in mg/kg)" min="0" max="1000" required>
+        </div>
+      </div>
+      <div class="input-row">
+        <div class="input-group">
+          <span class="input-icon">🥔</span>
+          <input type="number" id="K" name="K" placeholder="Potassium (K in mg/kg)" min="0" max="1000" required>
+        </div>
+        <div class="input-group">
+          <span class="input-icon">🌡️</span>
+          <input type="number" id="temperature" name="temperature" placeholder="Temperature (°C)" step="0.1" min="-10" max="60" required>
+        </div>
+      </div>
+      <div class="input-row">
+        <div class="input-group">
+          <span class="input-icon">💧</span>
+          <input type="number" id="humidity" name="humidity" placeholder="Humidity (%)" step="0.1" min="0" max="100" required>
+        </div>
+        <div class="input-group">
+          <span class="input-icon">🧪</span>
+          <input type="number" id="ph" name="ph" placeholder="pH Level (pH)" step="0.1" min="0" max="14" required>
+        </div>
+      </div>
+      <div class="input-row">
+        <div class="input-group" style="grid-column: span 2;">
+          <span class="input-icon">🌧️</span>
+          <input type="number" id="rainfall" name="rainfall" placeholder="Rainfall (mm)" step="0.1" min="0" max="1000" required>
+        </div>
+      </div>
+      <button type="submit" class="predict-btn">Get Recommendation</button>
+      <section id="resultSection" aria-live="polite">
+        <div id="cropError" style="color:#d32f2f; font-weight:600; margin-bottom:8px;"></div>
+        <h3 id="result"></h3>
+        <div id="fertilizer"></div>
+      </section>
+    </form>
+    <!-- Fertilizer Recommendation Form -->
+    <form id="fertilizerForm" autocomplete="off" style="display:none;" onsubmit="event.preventDefault(); predictFertilizer();">
+      <h2>AI Fertilizer Recommender</h2>
+      <div class="input-row">
+        <div class="input-group" style="grid-column: span 2;">
+          <span class="input-icon">🌾</span>
+          <input type="text" id="cropName" name="cropName" placeholder="Crop Name" required>
+        </div>
+      </div>
+      <div class="input-row">
+        <div class="input-group">
+          <span class="input-icon">🌱</span>
+          <input type="number" id="fN" name="fN" placeholder="Nitrogen (N in mg/kg)" min="0" max="1000" required>
+        </div>
+        <div class="input-group">
+          <span class="input-icon">🌾</span>
+          <input type="number" id="fP" name="fP" placeholder="Phosphorous (P in mg/kg)" min="0" max="1000" required>
+        </div>
+      </div>
+      <div class="input-row">
+        <div class="input-group" style="grid-column: span 2;">
+          <span class="input-icon">🥔</span>
+          <input type="number" id="fK" name="fK" placeholder="Potassium (K in mg/kg)" min="0" max="1000" required>
+        </div>
+      </div>
+      <button type="submit" class="predict-btn">Get Fertilizer Advice</button>
+      <section id="fertilizerResultSection" aria-live="polite">
+        <div id="fertilizerError" style="color:#d32f2f; font-weight:600; margin-bottom:8px;"></div>
+        <h3 id="fertilizerResult"></h3>
+        <div id="fertilizerTips"></div>
+      </section>
+    </form>
+  </div>
+</section>
+
+<style>
+.tab-btn {
+  background: var(--input-bg);
+  color: var(--deep-green);
+  border: none;
+  border-radius: 16px 16px 0 0;
+  font-size: 1.1rem;
+  font-weight: 600;
+  padding: 12px 32px;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+  transition: background 0.2s, color 0.2s;
+}
+.tab-btn.active {
+  background: var(--accent-yellow);
+  color: #222;
+  box-shadow: 0 4px 16px rgba(192,217,63,0.13);
+}
+</style>
+
+<script>
+function showTab(tab) {
+  document.getElementById('cropForm').style.display = tab === 'crop' ? 'block' : 'none';
+  document.getElementById('fertilizerForm').style.display = tab === 'fertilizer' ? 'block' : 'none';
+  document.getElementById('cropTab').classList.toggle('active', tab === 'crop');
+  document.getElementById('fertilizerTab').classList.toggle('active', tab === 'fertilizer');
+}
+
+// Dummy logic for demonstration
+function predictCrop() {
+    document.getElementById('cropError').innerHTML = "";
+    const error = validateCropInputs();
+    if (error) {
+      document.getElementById('cropError').innerHTML = error;
+      document.getElementById('result').textContent = "";
+      return;
+    }
+    showCropLoading(true);
+    const data = {
+        N: Number(document.getElementById('N').value),
+        P: Number(document.getElementById('P').value),
+        K: Number(document.getElementById('K').value),
+        temperature: Number(document.getElementById('temperature').value),
+        humidity: Number(document.getElementById('humidity').value),
+        ph: Number(document.getElementById('ph').value),
+        rainfall: Number(document.getElementById('rainfall').value)
+    };
+    fetch("http://127.0.0.1:5000/predict-crop", {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(data)
+    })
+    .then(res => res.json())
+    .then(res => {
+        if (res.recommended_crop) {
+            document.getElementById('result').innerHTML = "🌱 <b>Recommended Crop:</b> " + res.recommended_crop;
+        } else if (res.error) {
+            document.getElementById('cropError').innerHTML = "Error: " + res.error;
+            document.getElementById('result').textContent = "";
+        }
+        document.getElementById('fertilizer').textContent = "";
+    })
+    .catch(() => {
+        document.getElementById('cropError').innerHTML = "Error connecting to server.";
+        document.getElementById('result').textContent = "";
+    });
+}
+
+function showCropLoading(isLoading) {
+  const result = document.getElementById('result');
+  if (isLoading) {
+    result.innerHTML = '<span class="loader"></span>Loading...';
+  }
+}
+
+function validateCropInputs() {
+  let error = "";
+  const ph = Number(document.getElementById('ph').value);
+  const humidity = Number(document.getElementById('humidity').value);
+  const N = Number(document.getElementById('N').value);
+  const P = Number(document.getElementById('P').value);
+  const K = Number(document.getElementById('K').value);
+  const temperature = Number(document.getElementById('temperature').value);
+  const rainfall = Number(document.getElementById('rainfall').value);
+
+  if (isNaN(N) || N < 0 || N > 1000) error += "Nitrogen must be 0–1000 mg/kg.<br>";
+  if (isNaN(P) || P < 0 || P > 1000) error += "Phosphorous must be 0–1000 mg/kg.<br>";
+  if (isNaN(K) || K < 0 || K > 1000) error += "Potassium must be 0–1000 mg/kg.<br>";
+  if (isNaN(temperature) || temperature < -10 || temperature > 60) error += "Temperature must be -10–60°C.<br>";
+  if (isNaN(humidity) || humidity < 0 || humidity > 100) error += "Humidity must be between 0 and 100%.<br>";
+  if (isNaN(ph) || ph < 0 || ph > 14) error += "pH must be between 0 and 14.<br>";
+  if (isNaN(rainfall) || rainfall < 0 || rainfall > 1000) error += "Rainfall must be 0–1000 mm.<br>";
+  return error;
+}
+
+function predictFertilizer() {
+    document.getElementById('fertilizerError').innerHTML = "";
+    const error = validateFertilizerInputs();
+    if (error) {
+      document.getElementById('fertilizerError').innerHTML = error;
+      document.getElementById('fertilizerResult').textContent = "";
+      return;
+    }
+    showFertilizerLoading(true);
+    const data = {
+        Temparature: Number(document.getElementById('fTemperature')?.value || 25),
+        Humidity: Number(document.getElementById('fHumidity')?.value || 50),
+        Moisture: Number(document.getElementById('fMoisture')?.value || 0.5),
+        Soil_Type: Number(document.getElementById('fSoilType')?.value || 1),
+        Crop_Type: Number(document.getElementById('fCropType')?.value || 1),
+        Nitrogen: Number(document.getElementById('fN').value),
+        Potassium: Number(document.getElementById('fK').value),
+        Phosphorous: Number(document.getElementById('fP').value)
+    };
+    fetch("http://127.0.0.1:5000/recommend-fertilizer", {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(data)
+    })
+    .then(res => res.json())
+    .then(res => {
+        if (res.fertilizer) {
+            document.getElementById('fertilizerResult').innerHTML = "🧪 <b>Recommended Fertilizer:</b> " + res.fertilizer;
+        } else if (res.error) {
+            document.getElementById('fertilizerError').innerHTML = "Error: " + res.error;
+            document.getElementById('fertilizerResult').textContent = "";
+        }
+    })
+    .catch(() => {
+        document.getElementById('fertilizerError').innerHTML = "Error connecting to server.";
+        document.getElementById('fertilizerResult').textContent = "";
+    });
+}
+
+function showFertilizerLoading(isLoading) {
+  const result = document.getElementById('fertilizerResult');
+  if (isLoading) {
+    result.innerHTML = '<span class="loader"></span>Loading...';
+  }
+}
+
+function validateFertilizerInputs() {
+  let error = "";
+  const fN = Number(document.getElementById('fN').value);
+  const fP = Number(document.getElementById('fP').value);
+  const fK = Number(document.getElementById('fK').value);
+  if (isNaN(fN) || fN < 0 || fN > 1000) error += "Nitrogen must be 0–1000 mg/kg.<br>";
+  if (isNaN(fP) || fP < 0 || fP > 1000) error += "Phosphorous must be 0–1000 mg/kg.<br>";
+  if (isNaN(fK) || fK < 0 || fK > 1000) error += "Potassium must be 0–1000 mg/kg.<br>";
+  // Add more validation as needed for other fertilizer fields
+  return error;
+}
+</script>
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+
+  <footer class="main-footer">
+    <div class="footer-content">
+      
+    <div class="footer-bottom">
+      <div>
+        &copy; AGRIFARM 2025. All rights reserved.
+            </div>
+      
+    </div>
+  </footer>
+
+  <style>
+    .main-footer {
+      background: #fff;
+      border-top: 2px solid #e0e0e0;
+      padding: 48px 0 0 0;
+      font-family: 'Segoe UI', Arial, sans-serif;
+      margin-top: 0;
+    }
+    .footer-content {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-around;
+      gap: 32px;
+    }
+    .footer-col {
+      flex: 1 1 220px;
+      min-width: 200px;
+      margin-bottom: 24px;
+    }
+    .footer-col h3 {
+      color: #689f38;
+      font-size: 1.15rem;
+      margin-bottom: 12px;
+      font-weight: 700;
+    }
+    .footer-col a {
+      color: #335c67;
+      text-decoration: none;
+      font-size: 1rem;
+      transition: color 0.2s;
+    }
+    .footer-col a:hover {
+      color: #b6d43a;
+    }
+    .footer-label {
+      color: #689f38;
+      font-weight: 500;
+    }
+    .footer-app {
+      height: 32px;
+      margin: 4px 4px 0 0;
+      vertical-align: middle;
+    }
+    .footer-bottom {
+      border-top: 1px solid #e0e0e0;
+      margin-top: 12px;
+      padding: 18px 0 12px 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 1200px;
+      margin-left: auto;
+      margin-right: auto;
+      font-size: 0.98rem;
+      color: #335c67;
+      flex-wrap: wrap;
+    }
+    .footer-social a {
+      margin: 0 6px;
+      display: inline-block;
+      vertical-align: middle;
+    }
+    .footer-social img {
+      height: 32px;
+      width: 32px;
+      border-radius: 50%;
+      background: #eaf5d7;
+      padding: 4px;
+      transition: background 0.2s;
+    }
+    .footer-social img:hover {
+      background: #b6d43a;
+    }
+    @media (max-width: 900px) {
+      .footer-content {
+        flex-direction: column;
+        align-items: flex-start;
+        padding-left: 24px;
+        padding-right: 24px;
+      }
+      .footer-bottom {
+        flex-direction: column;
+        gap: 10px;
+        text-align: center;
+      }
+    }
+  </style>
+  <script>
+    // Optional: Smooth scroll for Explore button
+    document.querySelectorAll('.explore-btn').forEach(btn => {
+      btn.addEventListener('click', function(e) {
+        e.preventDefault();
+        document.getElementById('features').scrollIntoView({ behavior: 'smooth' });
+      });
+    });
+
+    let currentSlide = 0;
+    const slides = document.querySelectorAll('.hero-slide');
+    function showSlide(idx) {
+      slides.forEach((slide, i) => {
+        slide.classList.toggle('active', i === idx);
+      });
+    }
+    function moveSlide(dir) {
+      currentSlide = (currentSlide + dir + slides.length) % slides.length;
+      showSlide(currentSlide);
+    }
+    // Optional: Auto-slide every 7 seconds
+    setInterval(() => { moveSlide(1); }, 7000);
+  </script>
+</body>
+</html>
