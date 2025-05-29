@@ -2,23 +2,41 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Login - Crop Recommendation System</title>
+  <title>Login - AGRiFARM</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css?family=Poppins:700,500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
   <style>
+    :root {
+      --primary-green: #2a4d23;
+      --accent-yellow: #c0d93f;
+      --white: #fff;
+      --deep-green: #335c67;
+      --input-bg: #f8fafc;
+      --input-shadow: 0px 8px 24px rgba(0, 0, 0, 0.13);
+      --input-border: #e0e6ea;
+      --input-placeholder: #335c67;
+      --button-bg: #c0d93f;
+      --button-hover: #b6d43a;
+      --button-text: #222;
+      --soft-shadow: 0px 8px 24px rgba(0, 0, 0, 0.13);
+    }
+
     body {
+      font-family: 'Poppins', 'Segoe UI', Arial, sans-serif;
+      background: #f4f8fb;
+      color: var(--deep-green);
+      font-size: 16px;
       margin: 0;
       padding: 0;
       min-height: 100vh;
-      background: url('Green Yellow Modern Farming Presentation.png') center center/cover no-repeat;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-family: 'Segoe UI', Arial, sans-serif;
-      flex-direction: column;
     }
+
+    /* Navbar styles from index.html */
     .navbar {
       width: 100%;
-      background: rgba(192, 217, 63, 0.13); /* subtle accent yellow glass effect */
+      background: rgba(192, 217, 63, 0.13);
       backdrop-filter: blur(6px);
       -webkit-backdrop-filter: blur(6px);
       box-shadow: 0 2px 12px rgba(42,77,35,0.08);
@@ -35,30 +53,19 @@
       box-sizing: border-box;
       transition: background 0.3s;
     }
-    .navbar .nav-logo {
-      display: flex;
-      align-items: center;
-      gap: 10px;
+
+    .navbar.scrolled {
+      background: rgba(42,77,35,0.92);
+      box-shadow: 0 2px 12px rgba(42,77,35,0.10);
     }
-    .navbar .nav-logo img {
-      height: 38px;
-      width: 38px;
-      border-radius: 50%;
-      background: #fff;
-      object-fit: cover;
-    }
-    .navbar .nav-logo span {
-      color: #fff;
-      font-size: 1.3rem;
-      font-weight: 700;
-      letter-spacing: 0.08em;
-    }
+
     .navbar .nav-links {
       display: flex;
       gap: 28px;
       justify-content: center;
       align-items: center;
     }
+
     .navbar .nav-links a {
       color: var(--deep-green);
       text-decoration: none;
@@ -72,6 +79,7 @@
       align-items: center;
       gap: 8px;
     }
+
     .navbar .nav-links a.active,
     .navbar .nav-links a:hover {
       color: var(--accent-yellow);
@@ -79,151 +87,209 @@
       background: none;
       border-radius: 0;
     }
-    .login-glass {
-      background: rgba(255,255,255,0.18);
-      box-shadow: 0 8px 32px 0 rgba(31,38,135,0.18);
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
+
+    /* Login Container */
+    .login-section {
+      background: #f4f8fb;
+      padding: 48px 0 32px 0;
+      display: flex;
+      justify-content: center;
+      min-height: calc(100vh - 64px);
+      align-items: center;
+    }
+
+    .login-container {
+      background: #fff;
       border-radius: 18px;
-      border: 1px solid rgba(255,255,255,0.28);
+      box-shadow: var(--soft-shadow);
+      padding: 48px;
       max-width: 400px;
       width: 90%;
-      padding: 40px 32px 32px 32px;
+      margin: 0 auto;
       text-align: center;
-      color: #fff;
-      position: relative;
-      margin-top: 100px;
     }
-    .login-glass .logo {
-      width: 64px;
-      height: 64px;
-      margin-bottom: 18px;
-      background: #fff;
+
+    .login-container .logo {
+      width: 80px;
+      height: 80px;
+      margin: 0 auto 24px;
+      background: var(--input-bg);
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      margin-left: auto;
-      margin-right: auto;
+      box-shadow: var(--input-shadow);
     }
-    .login-glass .logo img {
-      width: 40px;
-      height: 40px;
-      display: block;
+
+    .login-container .logo img {
+      width: 48px;
+      height: 48px;
     }
-    .login-glass h1 {
+
+    .login-container h1 {
+      color: var(--primary-green);
       font-size: 2.2rem;
       font-weight: 700;
-      letter-spacing: 0.18em;
       margin: 0 0 8px 0;
-      color: #fff;
-      text-shadow: 0 2px 8px rgba(0,0,0,0.18);
     }
-    .login-glass p {
+
+    .login-container p {
+      color: var(--deep-green);
       font-size: 1.1rem;
-      margin-bottom: 24px;
-      color: #f3f3f3;
-      letter-spacing: 0.04em;
+      margin-bottom: 32px;
     }
-    .login-glass input {
+
+    .login-container input {
       width: 100%;
-      padding: 12px;
-      margin: 10px 0;
+      padding: 16px 24px;
+      margin: 12px 0;
       border: none;
-      border-radius: 7px;
-      font-size: 1rem;
-      background: rgba(255,255,255,0.85);
-      color: #222;
+      border-radius: 12px;
+      font-size: 1.1rem;
+      background: var(--input-bg);
+      color: var(--deep-green);
       outline: none;
       box-sizing: border-box;
+      box-shadow: var(--input-shadow);
+      transition: box-shadow 0.2s;
     }
-    .login-glass button {
+
+    .login-container input:focus {
+      box-shadow: 0px 8px 32px rgba(192,217,63,0.18);
+    }
+
+    .login-container input::placeholder {
+      color: var(--input-placeholder);
+      opacity: 0.8;
+    }
+
+    .login-container button {
       width: 100%;
-      padding: 12px;
-      background: #2a4d69;
-      color: #fff;
+      padding: 16px;
+      background: var(--button-bg);
+      color: var(--button-text);
       border: none;
-      border-radius: 7px;
-      font-size: 1.1rem;
+      border-radius: 12px;
+      font-size: 1.2rem;
       font-weight: 600;
-      margin-top: 10px;
+      margin-top: 24px;
       cursor: pointer;
-      transition: background 0.2s;
+      transition: all 0.2s ease;
+      box-shadow: var(--soft-shadow);
     }
-    .login-glass button:hover {
-      background: #1e3552;
+
+    .login-container button:hover {
+      background: var(--button-hover);
+      transform: translateY(-2px);
     }
+
     #error-message {
-      color: #ffb3b3;
-      margin-top: 12px;
-      min-height: 24px;
+      color: #d32f2f;
+      background: #ffebee;
+      padding: 12px;
+      border-radius: 8px;
+      margin: 16px 0;
+      font-weight: 500;
+      display: none;
     }
-    .login-glass .signup-link {
+
+    #error-message.show {
       display: block;
-      margin-top: 18px;
-      color: #fff;
-      text-decoration: underline;
+      animation: shake 0.5s ease;
+    }
+
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      25% { transform: translateX(-5px); }
+      75% { transform: translateX(5px); }
+    }
+
+    .login-container .signup-link {
+      display: block;
+      margin-top: 24px;
+      color: var(--deep-green);
+      text-decoration: none;
       font-size: 1rem;
       transition: color 0.2s;
     }
-    .login-glass .signup-link:hover {
-      color: #ffeb3b;
+
+    .login-container .signup-link:hover {
+      color: var(--accent-yellow);
     }
+
     @media (max-width: 600px) {
-      .navbar {
-        flex-direction: column;
-        height: auto;
-        padding: 8px 8px;
+      .login-container {
+        padding: 32px 24px;
       }
-      .navbar .nav-links {
-        gap: 14px;
+      
+      .login-container h1 {
+        font-size: 1.8rem;
       }
-      .login-glass {
-        padding: 24px 8px 18px 8px;
-        margin-top: 80px;
+      
+      .login-container input {
+        padding: 14px 20px;
+        font-size: 1rem;
       }
-      .login-glass h1 {
-        font-size: 1.4rem;
-      }
-    }
-    .navbar .logo {
-      font-size: 1.5rem;
-      font-weight: bold;
-      color: #1a73e8;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-    .navbar .logo img {
-      height: 40px;
-      width: auto;
     }
   </style>
 </head>
 <body>
+  <!-- Navbar -->
   <nav class="navbar">
-    <div class="logo">
-      <img src="Yellow Black Bold Honey Farm Logo (1).png" alt="Logo" style="height: 230px; width: auto;">
-    </div>
     <div class="nav-links">
-      <a href="index.html" class="active"><i class="fas fa-home"></i> Home</a>
+      <a href="index.html"><i class="fas fa-home"></i> Home</a>
       <a href="about.html"><i class="fas fa-leaf"></i> About Us</a>
-      <a href="contact.html"><i class="fas fa-envelope"></i> Contact Us</a>
-      <a href="login.html"><i class="fas fa-sign-in-alt"></i> Login</a>
+      <a href="crop disease detector.html"><i class="fas fa-bug"></i> Disease Detector</a>
+      <a href="contact.html"><i class="fas fa-envelope"></i> Contact</a>
+      <a href="login.html" class="active"><i class="fas fa-sign-in-alt"></i> Login</a>
     </div>
   </nav>
-  <div class="login-glass">
-    <div class="logo">
-      <img src="https://img.icons8.com/ios-filled/50/228B22/wheat.png" alt="Logo" />
+
+  <!-- Login Section -->
+  <section class="login-section">
+    <div class="login-container">
+      <div class="logo">
+        <img src="https://img.icons8.com/ios-filled/50/228B22/wheat.png" alt="AGRiFARM Logo" />
+      </div>
+      <h1>Welcome Back</h1>
+      <p>Sign in to access your AGRiFARM account</p>
+      
+      <form id="loginForm" onsubmit="event.preventDefault(); login();">
+        <input type="text" id="username" placeholder="Username" required>
+        <input type="password" id="password" placeholder="Password" required>
+        <button type="submit">Sign In</button>
+        <div id="error-message"></div>
+        <a href="signup.html" class="signup-link">Don't have an account? Sign Up</a>
+      </form>
     </div>
-    <h1>BORCELLE</h1>
-    <p>Farming Presentation</p>
-    <input type="text" id="username" placeholder="Username" required>
-    <input type="password" id="password" placeholder="Password" required>
-    <button onclick="login()">Login</button>
-    <div id="error-message"></div>
-    <a href="signup.html" class="signup-link">Don't have an account? Sign Up</a>
-  </div>
-  <script src="login.js"></script>
+  </section>
+
+  <script>
+    // Navbar scroll effect
+    window.addEventListener('scroll', function() {
+      const navbar = document.querySelector('.navbar');
+      if (window.scrollY > 50) {
+        navbar.classList.add('scrolled');
+      } else {
+        navbar.classList.remove('scrolled');
+      }
+    });
+
+    function login() {
+      const username = document.getElementById("username").value.trim();
+      const password = document.getElementById("password").value;
+      const errorMsg = document.getElementById("error-message");
+
+      if (!username || !password) {
+        errorMsg.textContent = "Please fill in all fields.";
+        errorMsg.classList.add('show');
+        return;
+      }
+
+      // Demo only: In real app, send data to backend
+      errorMsg.style.display = "none";
+      window.location.href = "index.html";
+    }
+  </script>
 </body>
 </html>
